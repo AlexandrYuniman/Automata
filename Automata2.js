@@ -1,24 +1,24 @@
 function Automata(subString) {
     length = subString.length
     alph = new Array()
-    //Определяем алфавит строки t
+    //ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ Г Г«ГґГ ГўГЁГІ Г±ГІГ°Г®ГЄГЁ t
     for (i = 0; i < length; i++)
         alph[subString.charAt(i)] = 0
-    //В двумерном массиве del будем хранить таблицу переходов
+    //Г‚ Г¤ГўГіГ¬ГҐГ°Г­Г®Г¬ Г¬Г Г±Г±ГЁГўГҐ del ГЎГіГ¤ГҐГ¬ ГµГ°Г Г­ГЁГІГј ГІГ ГЎГ«ГЁГ¶Гі ГЇГҐГ°ГҐГµГ®Г¤Г®Гў
     del = new Array(length + 1)
     for (j = 0; j <= length; j++)
         del[j] = new Array()
-    //Инициализируем таблицу переходов
+    //Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§ГЁГ°ГіГҐГ¬ ГІГ ГЎГ«ГЁГ¶Гі ГЇГҐГ°ГҐГµГ®Г¤Г®Гў
     for (i in alph)
         del[0][i] = 0
-    //Формируем таблицу переходов
+    //Г”Г®Г°Г¬ГЁГ°ГіГҐГ¬ ГІГ ГЎГ«ГЁГ¶Гі ГЇГҐГ°ГҐГµГ®Г¤Г®Гў
     for (j = 0; j < length; j++) {
         prev = del[j][subString.charAt(j)]
         del[j][subString.charAt(j)] = j + 1
         for (i in alph)
             del[j + 1][i] = del[prev][i]
     } 
-    //Выводим таблицу переходов
+    //Г‚Г»ГўГ®Г¤ГЁГ¬ ГІГ ГЎГ«ГЁГ¶Гі ГЇГҐГ°ГҐГµГ®Г¤Г®Гў
     for (j = 0; j <= length; j++) {
         out = ''
         for (i in alph)
@@ -39,11 +39,14 @@ function findIndexes(string, subString) {
             positionInDel = del[positionInDel][string[i]]
         }
     }
+    if (result.length == 0)
+        console.log('noIndexesFound')
     return result;
 }
 
 let fs = require('fs');
 var string = fs.readFileSync('Alice.txt');
 string = string.toString()
+console.log(findIndexes('ababaabaaababababa', 'abc'));
 console.log(findIndexes('ababaabaaababababa', 'aba'));
 console.log(findIndexes(string, 'Alice'));
