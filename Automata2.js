@@ -1,24 +1,24 @@
 function Automata(subString) {
     length = subString.length
     alph = new Array()
-    //Îïðåäåëÿåì àëôàâèò ñòðîêè t
+    //Определяем алфавит строки subString
     for (i = 0; i < length; i++)
         alph[subString.charAt(i)] = 0
-    //Â äâóìåðíîì ìàññèâå del áóäåì õðàíèòü òàáëèöó ïåðåõîäîâ
+    //В двумерном массиве del будем хранить таблицу переходов
     del = new Array(length + 1)
     for (j = 0; j <= length; j++)
         del[j] = new Array()
-    //Èíèöèàëèçèðóåì òàáëèöó ïåðåõîäîâ
+    //Инициализируем таблицу переходов
     for (i in alph)
         del[0][i] = 0
-    //Ôîðìèðóåì òàáëèöó ïåðåõîäîâ
+    //Формируем таблицу переходов
     for (j = 0; j < length; j++) {
         prev = del[j][subString.charAt(j)]
         del[j][subString.charAt(j)] = j + 1
         for (i in alph)
             del[j + 1][i] = del[prev][i]
     } 
-    //Âûâîäèì òàáëèöó ïåðåõîäîâ
+    //Выводим таблицу переходов
     for (j = 0; j <= length; j++) {
         out = ''
         for (i in alph)
@@ -40,7 +40,7 @@ function findIndexes(string, subString) {
         }
     }
     if (result.length == 0)
-        console.log('noIndexesFound')
+        return 'noIndexesFound';    
     return result;
 }
 
